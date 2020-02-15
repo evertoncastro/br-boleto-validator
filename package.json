@@ -1,7 +1,7 @@
 {
   "name": "boleto",
   "version": "1.0.0",
-  "description": "API for Ewally's Job Test",
+  "description": "API",
   "main": "app.js",
   "scripts": {
     "test": "mocha"
