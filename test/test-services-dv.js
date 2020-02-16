@@ -2,9 +2,9 @@ var expect  = require('chai').expect;
 var dv = require('./../src/services/dv');
 
 it('Deep parser should return a single character numeric value [1-9]', function(){
-    expect(deepParser(29)).to.equal(2);
-    expect(deepParser(18)).to.equal(9);
-    expect(deepParser(9)).to.equal(9);
+    expect(dv.deepParser(29)).to.equal(2);
+    expect(dv.deepParser(18)).to.equal(9);
+    expect(dv.deepParser(9)).to.equal(9);
 });
 
 it('Product calc should return the correct value', function(done) {
