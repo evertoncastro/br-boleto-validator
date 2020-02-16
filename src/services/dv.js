@@ -1,8 +1,7 @@
 
 function calcModule10(serial, factor) {
     let product = productCalcModule10(serial, factor);
-    let fCalc = ((Math.ceil(product[0] / 10) * 10) - product[0]).toString();
-    return fCalc;
+    return ((Math.ceil(product[0] / 10) * 10) - product[0]).toString();
 }
 
 function productCalcModule10(serial, factor) {
