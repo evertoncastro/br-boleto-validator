@@ -1,3 +1,4 @@
+var modules = require('./modules');
 
 function splitBilletLine(line){
     return {
@@ -12,8 +13,11 @@ function splitBilletLine(line){
     }
 }
 
-function checkField1DV(){
-
+function checkField1DV(value, expectedDV){
+    if(modules.calcModule10(value, 2) !== expectedDV){
+        return false;
+    }
+    return true;
 }
 
 function checkField2DV(){
@@ -26,5 +30,6 @@ function checkField3DV(){
 
 
 module.exports = {
-    splitBilletLine: splitBilletLine
+    splitBilletLine: splitBilletLine,
+    checkField1DV: checkField1DV
 }
