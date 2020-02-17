@@ -2,7 +2,7 @@ var expect  = require('chai').expect;
 var modules = require('./../src/services/modules');
 
 it('Deep parser should return a single character numeric value [1-9]', function(done){
-    expect(modules.deepParser(29)).to.equal(2);
+    expect(modules.deepParser(2229)).to.equal(6);
     expect(modules.deepParser(18)).to.equal(9);
     expect(modules.deepParser(9)).to.equal(9);
     done();

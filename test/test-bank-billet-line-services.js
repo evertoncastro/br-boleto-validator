@@ -1,6 +1,6 @@
 var chai  = require('chai');
 var spies = require('chai-spies');
-var billetLine = require('./../src/services/billetLine');
+var billetLine = require('./../src/services/bankBilletLine');
 var modules = require('./../src/services/modules');
 
 chai.use(spies);
@@ -9,12 +9,11 @@ const sandbox = chai.spy.sandbox();
 
 describe('billetLine Services', () => {
     beforeEach(() => {
-        array = [];
         sandbox.on(modules, ['calcModule10']);
     });
 
     afterEach(() => {
-      sandbox.restore(); // restores original methods on `array`
+        sandbox.restore(); // restores original methods on `array`
     })
 
     it('SplitBilletLine should return an object', function(done){
@@ -123,7 +122,5 @@ describe('billetLine Services', () => {
         expect(valid).to.be.false;
         done();
     });
-
-    
 });
 
