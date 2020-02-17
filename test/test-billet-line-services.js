@@ -38,5 +38,55 @@ describe('billetLine Services', () => {
         expect(modules.calcModule10).to.have.been.called.with.exactly('001905009', 2);
         done();
     });
+
+    it('check1dv should call return true for a valid dv', function(done){
+        valid = billetLine.checkField1DV('001905009', '5')
+        expect(valid).to.be.true;
+        done();
+    });
+
+    it('check1dv should return false for invalid dv', function(done){
+        valid = billetLine.checkField1DV('001905009', '6')
+        expect(valid).to.be.false;
+        done();
+    });
+
+    it('check2dv should call calcModule10 with right params', function(done){
+        billetLine.checkField2DV('4014481606', '9')
+        expect(modules.calcModule10).to.have.been.called.with.exactly('4014481606', 1);
+        done();
+    });
+
+    it('check2dv should return true for valid dv', function(done){
+        valid = billetLine.checkField2DV('4014481606', '9')
+        expect(valid).to.be.true;
+        done();
+    });
+
+    it('check2dv should return false for invalid dv', function(done){
+        valid = billetLine.checkField2DV('4014481606', '8')
+        expect(valid).to.be.false;
+        done();
+    });
+
+    it('check3dv should call calcModule10 with right params', function(done){
+        billetLine.checkField3DV('0680935031', '4')
+        expect(modules.calcModule10).to.have.been.called.with.exactly('0680935031', 1);
+        done();
+    });
+
+    it('check3dv should return true for valid dv', function(done){
+        valid = billetLine.checkField3DV('0680935031', '4')
+        expect(valid).to.be.true;
+        done();
+    });
+
+    it('check3dv should return false for valid dv', function(done){
+        valid = billetLine.checkField3DV('0680935031', '5')
+        expect(valid).to.be.false;
+        done();
+    });
+
+    
 });
 

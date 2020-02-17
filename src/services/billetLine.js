@@ -20,16 +20,24 @@ function checkField1DV(value, expectedDV){
     return true;
 }
 
-function checkField2DV(){
-
+function checkField2DV(value, expectedDV){
+    if(modules.calcModule10(value, 1) !== expectedDV){
+        return false;
+    }
+    return true;
 }
 
-function checkField3DV(){
-
+function checkField3DV(value, expectedDV){
+    if(modules.calcModule10(value, 1) !== expectedDV){
+        return false;
+    }
+    return true;
 }
 
 
 module.exports = {
     splitBilletLine: splitBilletLine,
-    checkField1DV: checkField1DV
+    checkField1DV: checkField1DV,
+    checkField2DV: checkField2DV,
+    checkField3DV: checkField3DV
 }
