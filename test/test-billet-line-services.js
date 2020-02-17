@@ -5,7 +5,6 @@ var modules = require('./../src/services/modules');
 
 chai.use(spies);
 const expect = chai.expect;
-const should = chai.should();
 const sandbox = chai.spy.sandbox();
 
 describe('billetLine Services', () => {
@@ -32,7 +31,45 @@ describe('billetLine Services', () => {
         });
         done();
     });
-    
+
+    it('infoFromField1 should return a valid object', function(done){
+        let info = billetLine.infoFromField1('001905009', '5');
+        expect(info).to.deep.equal({
+            fi: '001',
+            curCode: '9',
+            pos20to24: '05009',
+            dv: '5' 
+        });
+        done();
+    });
+
+    it('infoFromField2 should return a valid object', function(done){
+        let info = billetLine.infoFromField2('4014481606', '9');
+        expect(info).to.deep.equal({
+            pos25to34: '4014481606',
+            dv: '9' 
+        });
+        done();
+    });
+
+    it('infoFromField3 should return a valid object', function(done){
+        let info = billetLine.infoFromField3('0680935031', '4');
+        expect(info).to.deep.equal({
+            pos35to44: '0680935031',
+            dv: '4' 
+        });
+        done();
+    });
+
+    it('infoFromField5 should return a valid object', function(done){
+        let info = billetLine.infoFromField5('37370000000100');
+        expect(info).to.deep.equal({
+            dueDateFactor: '3737',
+            value: '0000000100'
+        });
+        done();
+    });
+
     it('check1dv should call calcModule10 with right params', function(done){
         billetLine.checkField1DV('001905009', '5')
         expect(modules.calcModule10).to.have.been.called.with.exactly('001905009', 2);
@@ -40,13 +77,13 @@ describe('billetLine Services', () => {
     });
 
     it('check1dv should call return true for a valid dv', function(done){
-        valid = billetLine.checkField1DV('001905009', '5')
+        let valid = billetLine.checkField1DV('001905009', '5')
         expect(valid).to.be.true;
         done();
     });
 
     it('check1dv should return false for invalid dv', function(done){
-        valid = billetLine.checkField1DV('001905009', '6')
+        let valid = billetLine.checkField1DV('001905009', '6')
         expect(valid).to.be.false;
         done();
     });
@@ -58,13 +95,13 @@ describe('billetLine Services', () => {
     });
 
     it('check2dv should return true for valid dv', function(done){
-        valid = billetLine.checkField2DV('4014481606', '9')
+        let valid = billetLine.checkField2DV('4014481606', '9')
         expect(valid).to.be.true;
         done();
     });
 
     it('check2dv should return false for invalid dv', function(done){
-        valid = billetLine.checkField2DV('4014481606', '8')
+        let valid = billetLine.checkField2DV('4014481606', '8')
         expect(valid).to.be.false;
         done();
     });
@@ -76,13 +113,13 @@ describe('billetLine Services', () => {
     });
 
     it('check3dv should return true for valid dv', function(done){
-        valid = billetLine.checkField3DV('0680935031', '4')
+        let valid = billetLine.checkField3DV('0680935031', '4')
         expect(valid).to.be.true;
         done();
     });
 
     it('check3dv should return false for valid dv', function(done){
-        valid = billetLine.checkField3DV('0680935031', '5')
+        let valid = billetLine.checkField3DV('0680935031', '5')
         expect(valid).to.be.false;
         done();
     });

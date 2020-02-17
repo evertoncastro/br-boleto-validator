@@ -13,6 +13,36 @@ function splitBilletLine(line){
     }
 }
 
+function infoFromField1(value, dv){
+    return {
+        fi: value.substr(0, 3),
+        curCode: value.substr(3, 1),
+        pos20to24: value.substr(4, 5),
+        dv: dv
+    }
+}
+
+function infoFromField2(value, dv){
+    return {
+        pos25to34: value,
+        dv: dv
+    }
+}
+
+function infoFromField3(value, dv){
+    return {
+        pos35to44: value,
+        dv: dv
+    }
+}
+
+function infoFromField5(value){
+    return {
+        dueDateFactor: value.substr(0, 4),
+        value: value.substr(4, 10)
+    }
+}
+
 function checkField1DV(value, expectedDV){
     if(modules.calcModule10(value, 2) !== expectedDV){
         return false;
@@ -39,5 +69,9 @@ module.exports = {
     splitBilletLine: splitBilletLine,
     checkField1DV: checkField1DV,
     checkField2DV: checkField2DV,
-    checkField3DV: checkField3DV
+    checkField3DV: checkField3DV,
+    infoFromField1: infoFromField1,
+    infoFromField2: infoFromField2,
+    infoFromField3: infoFromField3,
+    infoFromField5: infoFromField5
 }
