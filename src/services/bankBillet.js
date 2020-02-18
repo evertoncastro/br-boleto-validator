@@ -4,6 +4,7 @@ let errors = require('./../errors');
 
 
 function bankBillet(line){
+    // TODO: more tests for exceptions
     const fields = bankBilletLine.splitBilletLine(line);
     if(!bankBilletLine.checkField1DV(fields.field1, fields.field1DV)) throw errors.BusinessException('Invalid DV for block 1');
     if(!bankBilletLine.checkField2DV(fields.field2, fields.field2DV)) throw errors.BusinessException('Invalid DV for block 2');
@@ -12,6 +13,7 @@ function bankBillet(line){
 }
 
 function mountBankBilletInfo(lineInfo){
+    // TODO: more tests for exceptions
     let infoField1 = bankBilletLine.infoFromField1(lineInfo.field1, lineInfo.field1DV);
     let infoField2 = bankBilletLine.infoFromField2(lineInfo.field2, lineInfo.field2DV);
     let infoField3 = bankBilletLine.infoFromField3(lineInfo.field3, lineInfo.field3DV);
