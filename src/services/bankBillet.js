@@ -6,9 +6,9 @@ let errors = require('./../errors');
 function bankBillet(line){
     // TODO: more tests for exceptions
     const fields = bankBilletLine.splitBilletLine(line);
-    if(!bankBilletLine.checkField1DV(fields.field1, fields.field1DV)) throw errors.BusinessException('Invalid DV for block 1');
-    if(!bankBilletLine.checkField2DV(fields.field2, fields.field2DV)) throw errors.BusinessException('Invalid DV for block 2');
-    if(!bankBilletLine.checkField3DV(fields.field3, fields.field3DV)) throw errors.BusinessException('Invalid DV for block 3');
+    if(!bankBilletLine.checkField1DV(fields.field1, fields.field1DV)) throw errors.BusinessException('INVALID DV FOR BLOCK 1');
+    if(!bankBilletLine.checkField2DV(fields.field2, fields.field2DV)) throw errors.BusinessException('INVALID DV FOR BLOCK 2');
+    if(!bankBilletLine.checkField3DV(fields.field3, fields.field3DV)) throw errors.BusinessException('INVALID DV FOR BLOCK 3');
     return mountBankBilletInfo(fields);
 }
 
@@ -19,7 +19,7 @@ function mountBankBilletInfo(lineInfo){
     let infoField3 = bankBilletLine.infoFromField3(lineInfo.field3, lineInfo.field3DV);
     let infoField5 = bankBilletLine.infoFromField5(lineInfo.field5);
     let tempBarCode = `${infoField1.fi}${infoField1.curCode}X${infoField5.dueDateFactor}${infoField5.value}${infoField1.pos20to24}${infoField2.pos25to34}${infoField3.pos35to44}`;
-    if(modules.bankModule11(tempBarCode.replace('X', '')) !== lineInfo.field4) throw new errors.BusinessException('Invalid bar code DV');
+    if(modules.bankModule11(tempBarCode.replace('X', '')) !== lineInfo.field4) throw new errors.BusinessException('INVALID BAR CODE DV');
     return {
         barCode: tempBarCode.replace('X', lineInfo.field4),
         billetValue: getCurrencyFromValue(infoField5.value),

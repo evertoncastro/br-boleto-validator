@@ -1,8 +1,19 @@
 const bankBillet = require('./../services/bankBillet');
+const errors = require('./../errors')
 
 function getDataFromBilletLine(request, response){
-    const billetInfo = bankBillet.bankBillet('00190500954014481606906809350314337370000000100');
-    response.send(billetInfo);
+    try{
+        const billetInfo = bankBillet.bankBillet(request.params.line);
+        response.send(billetInfo);
+    }catch(error){
+        if (error instanceof errors.BusinessException) {
+            response.status(400).send({
+                name: error.name,
+                message: error.message
+            });
+        } 
+        response.send({});
+    }    
 }
 
 

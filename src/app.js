@@ -2,7 +2,7 @@ const express = require('express');
 const billetLineEP = require('./endpoints/billetLineEP');
 const app = express();
 
-app.get('/get_billet_info', function (request, response) {
+app.get('/get_billet_info/:line', function (request, response) {
     billetLineEP.getDataFromBilletLine(request, response);
 })
 
