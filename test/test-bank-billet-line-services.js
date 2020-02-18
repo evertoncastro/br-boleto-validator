@@ -71,7 +71,7 @@ describe('billetLine Services', () => {
 
     it('check1dv should call calcModule10 with right params', function(done){
         billetLine.checkField1DV('001905009', '5')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('001905009', 2);
+        expect(modules.calcModule10).to.have.been.called.with.exactly('001905009');
         done();
     });
 
@@ -89,7 +89,7 @@ describe('billetLine Services', () => {
 
     it('check2dv should call calcModule10 with right params', function(done){
         billetLine.checkField2DV('4014481606', '9')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('4014481606', 1);
+        expect(modules.calcModule10).to.have.been.called.with.exactly('4014481606');
         done();
     });
 
@@ -107,7 +107,7 @@ describe('billetLine Services', () => {
 
     it('check3dv should call calcModule10 with right params', function(done){
         billetLine.checkField3DV('0680935031', '4')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('0680935031', 1);
+        expect(modules.calcModule10).to.have.been.called.with.exactly('0680935031');
         done();
     });
 

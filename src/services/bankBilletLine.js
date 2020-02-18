@@ -44,21 +44,21 @@ function infoFromField5(value){
 }
 
 function checkField1DV(value, expectedDV){
-    if(modules.calcModule10(value, 2) !== expectedDV){
+    if(modules.calcModule10(value) !== expectedDV){
         return false;
     }
     return true;
 }
 
 function checkField2DV(value, expectedDV){
-    if(modules.calcModule10(value, 1) !== expectedDV){
+    if(modules.calcModule10(value) !== expectedDV){
         return false;
     }
     return true;
 }
 
 function checkField3DV(value, expectedDV){
-    if(modules.calcModule10(value, 1) !== expectedDV){
+    if(modules.calcModule10(value) !== expectedDV){
         return false;
     }
     return true;
