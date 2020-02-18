@@ -19,7 +19,12 @@ function getDateFromDueDateFactor(factor){
     return baseDate.toISOString().substr(0, 10);
 }
 
+function getCurrencyFromValue(value){
+    return `${Number(value.slice(0, value.length-2))}.${value.slice(-2)}`
+}
+
 module.exports = {
     mountBankBilletBarCode: mountBankBilletBarCode,
-    getDateFromDueDateFactor: getDateFromDueDateFactor
+    getDateFromDueDateFactor: getDateFromDueDateFactor,
+    getCurrencyFromValue: getCurrencyFromValue
 }

@@ -73,6 +73,18 @@ describe('bankBillet Services', () => {
         done();
     });
 
+    it('getCurrencyFromValue should return a correct currency value', (done) => {
+        let currency = bankBillet.getCurrencyFromValue('0000000101');
+        expect(currency).to.be.equal('1.01');
+        currency = bankBillet.getCurrencyFromValue('0030000101');
+        expect(currency).to.be.equal('300001.01');
+        currency = bankBillet.getCurrencyFromValue('0000000001');
+        expect(currency).to.be.equal('0.01');
+        currency = bankBillet.getCurrencyFromValue('0000080001');
+        expect(currency).to.be.equal('800.01');
+        done();
+    });
+
 
 
 });
