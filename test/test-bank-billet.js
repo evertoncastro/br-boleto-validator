@@ -10,7 +10,7 @@ const sandbox = chai.spy.sandbox();
 
 describe('bankBillet Services', () => {
     beforeEach(() => {
-        sandbox.on(bankBilletLine, ['infoFromField1']);
+        sandbox.on(bankBilletLine, ['infoFromField1', 'infoFromField2', 'infoFromField3', 'infoFromField5']);
     });
 
     afterEach(() => {
@@ -18,11 +18,35 @@ describe('bankBillet Services', () => {
     });
 
     it('mountBankLine should call info from field', (done) => {
-        bankBillet.mountBankBillet({
-            field1: '0000000',
-            field1DV: '1'
+        bankBillet.mountBankBilletBarCode({
+            field1: '001905009',
+            field1DV: '5',
+            field2: '4014481606',
+            field2DV: '9',
+            field3: '0680935031',
+            field3DV: '4',
+            field4: '3',
+            field5: '37370000000100'
         });
-        expect(bankBilletLine.infoFromField1).to.have.been.called.with.exactly('0000000', '1');
+        expect(bankBilletLine.infoFromField1).to.have.been.called.with.exactly('001905009', '5');
+        expect(bankBilletLine.infoFromField2).to.have.been.called.with.exactly('4014481606', '9');
+        expect(bankBilletLine.infoFromField3).to.have.been.called.with.exactly('0680935031', '4');
+        expect(bankBilletLine.infoFromField5).to.have.been.called.with.exactly('37370000000100');
+        done();
+    });
+
+    it('mountBankLine return a valid bank billet bar code', (done) => {
+        let barCode = bankBillet.mountBankBilletBarCode({
+            field1: '001905009',
+            field1DV: '5',
+            field2: '4014481606',
+            field2DV: '9',
+            field3: '0680935031',
+            field3DV: '4',
+            field4: '3',
+            field5: '37370000000100'
+        });
+        expect(barCode).to.be.equal('00193373700000001000500940144816060680935031')
         done();
     });
 
