@@ -2,6 +2,7 @@ let chai  = require('chai');
 let spies = require('chai-spies');
 let bankBillet = require('./../src/services/bankBillet');
 let bankBilletLine = require('./../src/services/bankBilletLine')
+const errors = require('./../src/errors');
 
 chai.use(spies);
 const expect = chai.expect;
@@ -10,7 +11,8 @@ const sandbox = chai.spy.sandbox();
 
 describe('bankBillet Services', () => {
     beforeEach(() => {
-        sandbox.on(bankBilletLine, ['infoFromField1', 'infoFromField2', 'infoFromField3', 'infoFromField5']);
+        sandbox.on(bankBilletLine, ['infoFromField1', 'infoFromField2', 
+        'infoFromField3', 'infoFromField5', 'splitBilletLine']);
     });
 
     afterEach(() => {
@@ -18,7 +20,7 @@ describe('bankBillet Services', () => {
     });
 
     it('mountBankLine should call info from each field/block', (done) => {
-        bankBillet.mountBankBilletBarCode({
+        bankBillet.mountBankBilletInfo({
             field1: '001905009',
             field1DV: '5',
             field2: '4014481606',
@@ -36,7 +38,7 @@ describe('bankBillet Services', () => {
     });
 
     it('mountBankLine should return a valid bank billet bar code', (done) => {
-        let barCode = bankBillet.mountBankBilletBarCode({
+        let barCode = bankBillet.mountBankBilletInfo({
             field1: '001905009',
             field1DV: '5',
             field2: '4014481606',
@@ -46,24 +48,28 @@ describe('bankBillet Services', () => {
             field4: '3',
             field5: '37370000000100'
         });
-        expect(barCode).to.be.equal('00193373700000001000500940144816060680935031');
+        expect(barCode).to.be.deep.equal({
+            barCode: '00193373700000001000500940144816060680935031',
+            billetValue: '1.00',
+            billetDueDate: '2007-12-31',
+            validLine: true
+        });
         done();
     });
 
-    it('mountBankLine should return false for an invalid bank billet bar code', (done) => {
-        let barCode = bankBillet.mountBankBilletBarCode({
-            field1: '001905009',
-            field1DV: '5',
-            field2: '4014481606',
-            field2DV: '9',
-            field3: '0680935031',
-            field3DV: '4',
-            field4: '3',
-            field5: '37370000000101'
-        });
-        expect(barCode).to.be.false;
-        done();
-    });
+    // it('mountBankLine should throw exception for an invalid bank billet bar code', (done) => {
+    //     expect(bankBillet.mountBankBilletBarCode({
+    //         field1: '001905009',
+    //         field1DV: '5',
+    //         field2: '4014481606',
+    //         field2DV: '9',
+    //         field3: '0680935031',
+    //         field3DV: '4',
+    //         field4: '3',
+    //         field5: '37370000000101'
+    //     })).to.throw(errors.BusinessException, 'Invalid bar code DV')
+    //     done();
+    // });
 
     it('getDateFromDueDateFactor should return a correct date', (done) => {
         let date = bankBillet.getDateFromDueDateFactor('1000');
@@ -85,6 +91,11 @@ describe('bankBillet Services', () => {
         done();
     });
 
-
+    // it('bankBillet function should call split billet line', (done) => {
+    //     const line = '00190500954014481606906809350314337370000000100'
+    //     bankBillet.bankBillet(line);
+    //     expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
+    //     done();
+    // });
 
 });
