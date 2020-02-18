@@ -9,7 +9,7 @@ function bankBillet(line){
     if(!bankBilletLine.checkField1DV(fields.field1, fields.field1DV)) throw errors.BusinessException('Invalid DV for block 1');
     if(!bankBilletLine.checkField2DV(fields.field2, fields.field2DV)) throw errors.BusinessException('Invalid DV for block 2');
     if(!bankBilletLine.checkField3DV(fields.field3, fields.field3DV)) throw errors.BusinessException('Invalid DV for block 3');
-    return bankBillet.mountBankBilletInfo(fields);
+    return mountBankBilletInfo(fields);
 }
 
 function mountBankBilletInfo(lineInfo){
