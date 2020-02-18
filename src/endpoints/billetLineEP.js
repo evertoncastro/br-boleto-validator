@@ -7,12 +7,10 @@ function getDataFromBilletLine(request, response){
         response.send(billetInfo);
     }catch(error){
         if (error instanceof errors.BusinessException) {
-            response.status(400).send({
-                name: error.name,
-                message: error.message
-            });
+            response.status(400).send({name: error.name, message: error.message});
         } 
-        response.send({});
+        response.status(500);
+        response.render('error', { error: error });
     }    
 }
 

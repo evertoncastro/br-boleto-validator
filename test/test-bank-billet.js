@@ -91,11 +91,11 @@ describe('bankBillet Services', () => {
         done();
     });
 
-    // it('bankBillet function should call split billet line', (done) => {
-    //     const line = '00190500954014481606906809350314337370000000100'
-    //     bankBillet.bankBillet(line);
-    //     expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
-    //     done();
-    // });
+    it('bankBillet function should call split billet line', (done) => {
+        const line = '00190500954014481606906809350314337370000000100'
+        bankBillet.bankBillet(line);
+        expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
+        done();
+    });
 
 });
