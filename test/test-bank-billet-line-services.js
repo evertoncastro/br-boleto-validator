@@ -1,7 +1,8 @@
 var chai  = require('chai');
 var spies = require('chai-spies');
-var billetLine = require('./../src/services/bankBilletLine');
-var modules = require('./../src/services/modules');
+const billetLine = require('./../src/services/bankBilletLine');
+const modules = require('./../src/services/modules');
+const errors = require('./../src/errors');
 
 chai.use(spies);
 const expect = chai.expect;
@@ -81,9 +82,8 @@ describe('billetLine Services', () => {
         done();
     });
 
-    it('check1dv should return false for invalid dv', function(done){
-        let valid = billetLine.checkField1DV('001905009', '6')
-        expect(valid).to.be.false;
+    it('check1dv should throw business exception for invalid dv', function(done){
+        expect(() => billetLine.checkField1DV('001905009', '6')).to.throw(errors.BusinessException(), 'INVALID DV FOR BLOCK 1');
         done();
     });
 
@@ -99,9 +99,8 @@ describe('billetLine Services', () => {
         done();
     });
 
-    it('check2dv should return false for invalid dv', function(done){
-        let valid = billetLine.checkField2DV('4014481606', '8')
-        expect(valid).to.be.false;
+    it('check2dv should throw business exception for invalid dv', function(done){
+        expect(() => billetLine.checkField2DV('4014481606', '8')).to.throw(errors.BusinessException(), 'INVALID DV FOR BLOCK 2');
         done();
     });
 
@@ -118,8 +117,7 @@ describe('billetLine Services', () => {
     });
 
     it('check3dv should return false for valid dv', function(done){
-        let valid = billetLine.checkField3DV('0680935031', '5')
-        expect(valid).to.be.false;
+        expect(() => billetLine.checkField3DV('0680935031', '5')).to.throw(errors.BusinessException(), 'INVALID DV FOR BLOCK 3');
         done();
     });
 });

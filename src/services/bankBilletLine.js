@@ -1,4 +1,5 @@
-var modules = require('./modules');
+const modules = require('./modules');
+const errors = require('./../errors');
 
 function splitBilletLine(line){
     return {
@@ -45,21 +46,21 @@ function infoFromField5(value){
 
 function checkField1DV(value, expectedDV){
     if(modules.calcModule10(value) !== expectedDV){
-        return false;
+        throw new errors.BusinessException('INVALID DV FOR BLOCK 1');
     }
     return true;
 }
 
 function checkField2DV(value, expectedDV){
     if(modules.calcModule10(value) !== expectedDV){
-        return false;
+        throw new errors.BusinessException('INVALID DV FOR BLOCK 2');
     }
     return true;
 }
 
 function checkField3DV(value, expectedDV){
     if(modules.calcModule10(value) !== expectedDV){
-        return false;
+        throw new errors.BusinessException('INVALID DV FOR BLOCK 3');
     }
     return true;
 }
