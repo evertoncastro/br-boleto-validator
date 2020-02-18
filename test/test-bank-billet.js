@@ -17,7 +17,7 @@ describe('bankBillet Services', () => {
         sandbox.restore(); // restores original methods on `array`
     });
 
-    it('mountBankLine should call info from field', (done) => {
+    it('mountBankLine should call info from each field/block', (done) => {
         bankBillet.mountBankBilletBarCode({
             field1: '001905009',
             field1DV: '5',
@@ -35,7 +35,7 @@ describe('bankBillet Services', () => {
         done();
     });
 
-    it('mountBankLine return a valid bank billet bar code', (done) => {
+    it('mountBankLine should return a valid bank billet bar code', (done) => {
         let barCode = bankBillet.mountBankBilletBarCode({
             field1: '001905009',
             field1DV: '5',
@@ -46,7 +46,30 @@ describe('bankBillet Services', () => {
             field4: '3',
             field5: '37370000000100'
         });
-        expect(barCode).to.be.equal('00193373700000001000500940144816060680935031')
+        expect(barCode).to.be.equal('00193373700000001000500940144816060680935031');
+        done();
+    });
+
+    it('mountBankLine should return false for an invalid bank billet bar code', (done) => {
+        let barCode = bankBillet.mountBankBilletBarCode({
+            field1: '001905009',
+            field1DV: '5',
+            field2: '4014481606',
+            field2DV: '9',
+            field3: '0680935031',
+            field3DV: '4',
+            field4: '3',
+            field5: '37370000000101'
+        });
+        expect(barCode).to.be.false;
+        done();
+    });
+
+    it('getDateFromDueDateFactor should return a correct date', (done) => {
+        let date = bankBillet.getDateFromDueDateFactor('1000');
+        expect(date).to.be.equal('2000-07-03');
+        date = bankBillet.getDateFromDueDateFactor('4789');
+        expect(date).to.be.equal('2010-11-17');
         done();
     });
 
