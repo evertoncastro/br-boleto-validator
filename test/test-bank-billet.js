@@ -57,19 +57,19 @@ describe('bankBillet Services', () => {
         done();
     });
 
-    // it('mountBankLine should throw exception for an invalid bank billet bar code', (done) => {
-    //     expect(bankBillet.mountBankBilletBarCode({
-    //         field1: '001905009',
-    //         field1DV: '5',
-    //         field2: '4014481606',
-    //         field2DV: '9',
-    //         field3: '0680935031',
-    //         field3DV: '4',
-    //         field4: '3',
-    //         field5: '37370000000101'
-    //     })).to.throw(errors.BusinessException, 'Invalid bar code DV')
-    //     done();
-    // });
+    it('mountBankLine should throw exception for an invalid bank billet bar code', (done) => {
+        expect(() => bankBillet.mountBankBilletInfo({
+            field1: '001905009',
+            field1DV: '5',
+            field2: '4014481606',
+            field2DV: '9',
+            field3: '0680935031',
+            field3DV: '4',
+            field4: '3',
+            field5: '37370000000101'
+        })).to.throw(errors.BusinessException(), 'INVALID BAR CODE DV')
+        done();
+    });
 
     it('getDateFromDueDateFactor should return a correct date', (done) => {
         let date = bankBillet.getDateFromDueDateFactor('1000');

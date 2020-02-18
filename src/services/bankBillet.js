@@ -6,9 +6,9 @@ let errors = require('./../errors');
 function bankBillet(line){
     // TODO: more tests for exceptions
     const fields = bankBilletLine.splitBilletLine(line);
-    if(!bankBilletLine.checkField1DV(fields.field1, fields.field1DV)) throw new errors.BusinessException('INVALID DV FOR BLOCK 1');
-    if(!bankBilletLine.checkField2DV(fields.field2, fields.field2DV)) throw new errors.BusinessException('INVALID DV FOR BLOCK 2');
-    if(!bankBilletLine.checkField3DV(fields.field3, fields.field3DV)) throw new errors.BusinessException('INVALID DV FOR BLOCK 3');
+    bankBilletLine.checkField1DV(fields.field1, fields.field1DV);
+    bankBilletLine.checkField2DV(fields.field2, fields.field2DV);
+    bankBilletLine.checkField3DV(fields.field3, fields.field3DV);
     return mountBankBilletInfo(fields);
 }
 
