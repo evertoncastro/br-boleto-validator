@@ -28,5 +28,10 @@ it('Calc Module 10 should return the correct value for field 3', function(done) 
     done();
 });
 
+it('Calc Module 11 should return the correct module', function(done) {
+    expect(modules.bankModule11('0019373700000001000500940144816060680935031')).to.equal('3');
+    done();
+});
+
 
 

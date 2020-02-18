@@ -25,8 +25,23 @@ function deepParser(value){
     return deepParser(sum)
 }
 
+function bankModule11(barCode){
+    const value = barCode.split('').reverse();
+    let factor = 2;
+    const sum = value.reduce((n, current) => {
+        const prod = Number(current) * factor;
+        factor = factor === 9 ? 2 : factor + 1;
+        return n + prod;
+    }, 0);
+    const mod = sum % 11;
+    const DV = 11 - mod;
+    if (DV === 0 || DV === 10 || DV === 11) return '1';
+    return DV.toString();
+}
+
 module.exports = {
     calcModule10: calcModule10,
     productCalcModule10: productCalcModule10,
-    deepParser: deepParser
+    deepParser: deepParser,
+    bankModule11: bankModule11
 }
