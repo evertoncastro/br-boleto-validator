@@ -116,7 +116,7 @@ describe('billetLine Services', () => {
         done();
     });
 
-    it('check3dv should return false for valid dv', function(done){
+    it('check3dv should throw business exception for invalid dv', function(done){
         expect(() => billetLine.checkField3DV('0680935031', '5')).to.throw(errors.BusinessException(), 'INVALID DV FOR BLOCK 3');
         done();
     });

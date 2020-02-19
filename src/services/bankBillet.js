@@ -4,7 +4,7 @@ let errors = require('./../errors');
 
 
 function bankBillet(line){
-    // TODO: more tests for exceptions
+    // TODO: more tests for calls
     const fields = bankBilletLine.splitBilletLine(line);
     bankBilletLine.checkField1DV(fields.field1, fields.field1DV);
     bankBilletLine.checkField2DV(fields.field2, fields.field2DV);
@@ -13,7 +13,7 @@ function bankBillet(line){
 }
 
 function mountBankBilletInfo(lineInfo){
-    // TODO: more tests for exceptions
+    // TODO: more tests for calls
     let infoField1 = bankBilletLine.infoFromField1(lineInfo.field1, lineInfo.field1DV);
     let infoField2 = bankBilletLine.infoFromField2(lineInfo.field2, lineInfo.field2DV);
     let infoField3 = bankBilletLine.infoFromField3(lineInfo.field3, lineInfo.field3DV);
