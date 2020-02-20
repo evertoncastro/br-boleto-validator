@@ -21,7 +21,37 @@ API construída com Nodejs utilizando o framework Express para gestão de rotas.
 Os testes unitários foram criados utilizando Mocha.js e Chai.js
 
 
-## Execução
+## Dependências
 ---
+
+- Node 10.16 ou posterior
+- Express 4.17.1
+- Mocha 5.2.0
+- Chai 4.1.2
+- Chai Spies 1.0.0
+
+## Funcionamento
+---
+
+## Setup
+
+
+```cd boleto```
+
+```npm install```
+
+
+## Tests
+
+```cd boleto```
+
+```npm test```
+
+## Server
+
+```cd boleto```
+
+```node src/app.js```
+
 
 
