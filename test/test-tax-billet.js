@@ -11,11 +11,11 @@ const sandbox = chai.spy.sandbox();
 
 describe('taxBillet Services', () => {
     beforeEach(() => {
-        sandbox.on(taxBilletLine, ['splitBilletLine']);
+        sandbox.on(taxBilletLine, ['splitTaxBilletLine']);
     });
 
     afterEach(() => {
-        sandbox.restore(); // restores original methods on `array`
+        sandbox.restore();
     });
 
     // it('mountTaxBilletInfo should call info from each field/block', (done) => {
@@ -68,11 +68,11 @@ describe('taxBillet Services', () => {
         done();
     });
 
-    // it('bankBillet function should call split billet line', (done) => {
-    //     const line = '00190500954014481606906809350314337370000000100'
-    //     bankBillet.bankBillet(line);
-    //     expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
-    //     done();
-    // });
+    it('taxBillet function should call split bank billet line', (done) => {
+        const line = '826500000003526200971483220205933918419181200223'
+        taxBillet.taxBillet(line);
+        expect(taxBilletLine.splitTaxBilletLine).to.have.been.called.with.exactly(line);
+        done();
+    });
 
 });
