@@ -1,4 +1,4 @@
-# Validador de Boleto
+# Validador de Boleto ║█║▌║█║▌│║▌║▌█║
 
 ## O projeto
 
