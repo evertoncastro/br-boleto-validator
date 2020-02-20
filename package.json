@@ -1,5 +1,5 @@
 {
-  "name": "Validador de Boleto",
+  "name": "ValidadorBoleto",
   "version": "1.0.0",
   "description": "API",
   "main": "app.js",
