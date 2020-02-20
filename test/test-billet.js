@@ -55,4 +55,24 @@ describe('billet Services', () => {
         done();
     });
 
+    it('startBilletLineCheck should return and object for a valid non sanitized tax line', (done) => {
+        const line = '83600000001-5 02570048100-2 68071551541-6 00126916582-3'
+        response = billet.startBilletLineCheck(line);
+        expect(response).to.deep.equal({
+            "barCode": "83600000001025700481006807155154100126916582",
+            "validLine": true
+        });
+        done();
+    });
+
+    // it('startBilletLineCheck should return and object for a sanitized valid tax line', (done) => {
+    //     const line = '858900004609524601791605607593050865831483000010'
+    //     response = billet.startBilletLineCheck(line);
+    //     expect(response).to.deep.equal({
+    //         "barCode": "85890000460524601791606075930508683148300001",
+    //         "validLine": true
+    //     });
+    //     done();
+    // });
+
 });
