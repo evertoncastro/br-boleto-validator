@@ -95,4 +95,17 @@ describe('billet Services', () => {
         done();
     });
 
+    it('startBilletLineCheck should return and object for a sanitized valid tax line 2', (done) => {
+        const line = '89610000000 0 59980001011 9 05333201006 4 26000015744 6'
+        response = billet.startBilletLineCheck(line);
+        expect(response).to.deep.equal({
+            "barCode": "89610000000599800010110533320100626000015744",
+            "validLine": true
+        });
+        done();
+    });
+
 });
+
+
+
