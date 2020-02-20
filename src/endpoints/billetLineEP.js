@@ -1,4 +1,3 @@
-const bankBillet = require('./../services/bankBillet');
 const errors = require('./../errors');
 const billet = require('./../services/billet');
 

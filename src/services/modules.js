@@ -30,7 +30,7 @@ function taxModule10(barCode){
         return n + prod;
     }, 0);
     let mod = 10 - (sum % 10);
-    return mod.toString();
+    return ((Math.ceil(sum / 10) * 10) - sum).toString();
 }
 
 function taxModule11(barCode){
