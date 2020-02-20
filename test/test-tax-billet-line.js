@@ -31,7 +31,7 @@ describe('taxBilletLine services', () => {
             field4DV: '3',
         });
     });
-    
+
     it('checkTaxField1 should call calcModule with right params', (done) => {
         taxBilletLine.checkTaxField1DV('82650000000', '3')
         expect(modules.calcModule10).to.have.been.called.with.exactly('82650000000');

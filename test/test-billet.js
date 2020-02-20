@@ -43,10 +43,10 @@ describe('billet Services', () => {
         done();
     });
 
-    // it('startBilletLineCheck function should throw exception for invalid line length', (done) => {
-    //     const line = '00190500954014481606906809350314'
-    //     expect(() => billet.startBilletLineCheck(line)).to.throws(errors.BusinessException(), 'INVALID LINE SIZE');
-    //     done();
-    // });
+    it('startBilletLineCheck function should throw exception for invalid line length', (done) => {
+        const line = '00190500954014481606906809350314'
+        expect(() => billet.startBilletLineCheck(line)).to.throws(errors.BusinessException(), 'INVALID LINE SIZE');
+        done();
+    });
 
 });

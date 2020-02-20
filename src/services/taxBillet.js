@@ -14,12 +14,16 @@ function taxBillet(line){
 }
 
 function mountTaxBilletInfo(lineInfo){
-    // TODO: more tests for calls
     let tempBarCode = `${lineInfo.field1}${lineInfo.field2}${lineInfo.field3}${lineInfo.field4}`;
+    const currencyCode = tempBarCode[2];
     const firstPart = tempBarCode.slice(0, 3);
-    const currentDV = tempBarCode.slice(3, 4);
-    const secondPart = tempBarCode.slice(4)
-    if(modules.taxModule10(`${firstPart}${secondPart}`) !== currentDV) throw new errors.BusinessException('INVALID BAR CODE DV');
+    const currentDV = tempBarCode[3];
+    const secondPart = tempBarCode.slice(4);
+    let moduleFunc = null;
+    if(currencyCode === '6' || currencyCode === '7') moduleFunc = modules.taxModule10;
+    else if(currencyCode === '8' || currencyCode === '9') moduleFunc = module.taxModule11;
+    else throw new errors.BusinessException('INVALID CURRENCY CODE');
+    if(moduleFunc(`${firstPart}${secondPart}`) !== currentDV) throw new errors.BusinessException('INVALID BAR CODE DV');
     return {
         barCode: `${firstPart}${currentDV}${secondPart}`,
         validLine: true

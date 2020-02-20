@@ -10,7 +10,7 @@ function startBilletLineCheck(line){
     }else if (line.length === 47){
         return bankBillet.bankBillet(line);
     }
-    throw errors.BusinessException('INVALID LINE SIZE');
+    throw new errors.BusinessException('INVALID LINE SIZE');
 }
 
 
