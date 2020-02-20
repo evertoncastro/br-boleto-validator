@@ -1,9 +1,10 @@
 const bankBillet = require('./../services/bankBillet');
-const errors = require('./../errors')
+const errors = require('./../errors');
+const billet = require('./../services/billet');
 
 function getDataFromBilletLine(request, response){
     try{
-        const billetInfo = bankBillet.bankBillet(request.params.line);
+        const billetInfo = billet.startBilletLineCheck(request.params.line);
         response.send(billetInfo);
     }catch(error){
         if (error instanceof errors.BusinessException) {
