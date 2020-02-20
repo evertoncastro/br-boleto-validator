@@ -1,5 +1,5 @@
-var chai  = require('chai');
-var spies = require('chai-spies');
+const chai  = require('chai');
+const spies = require('chai-spies');
 const billetLine = require('./../src/services/bankBilletLine');
 const modules = require('./../src/services/modules');
 const errors = require('./../src/errors');
