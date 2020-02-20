@@ -55,6 +55,11 @@ describe('billet Services', () => {
         done();
     });
 
+});
+
+
+describe('Integration Tests for Tax Line Billets', () => {
+    
     it('startBilletLineCheck should return and object for a valid non sanitized tax line', (done) => {
         const line = '83600000001-5 02570048100-2 68071551541-6 00126916582-3'
         response = billet.startBilletLineCheck(line);
@@ -100,6 +105,35 @@ describe('billet Services', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "89610000000599800010110533320100626000015744",
+            "validLine": true
+        });
+        done();
+    });
+
+});
+
+
+describe('Integration Tests for Bank Line Billets', () => {
+    
+    it('startBilletLineCheck should return and object for a valid sanitized bank line', (done) => {
+        const line = '23793381286000782713695000063305975520000370000'
+        response = billet.startBilletLineCheck(line);
+        expect(response).to.deep.equal({
+            "barCode": "23799755200003700003381260007827139500006330",
+            "billetDueDate": "2018-06-11",
+            "billetValue": "3700.00",
+            "validLine": true
+        });
+        done();
+    });
+
+    it('startBilletLineCheck should return and object for a valid non sanitized bank line', (done) => {
+        const line = '03399.13428 75401.000007 10838.001013 4 80180000073000'
+        response = billet.startBilletLineCheck(line);
+        expect(response).to.deep.equal({
+            "barCode": "03394801800000730009134275401000001083800101",
+            "billetDueDate": "2019-09-20",
+            "billetValue": "730.00",
             "validLine": true
         });
         done();
