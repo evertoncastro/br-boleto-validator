@@ -3,6 +3,7 @@ let spies = require('chai-spies');
 let taxBillet = require('./../src/services/taxBillet');
 let taxBilletLine = require('./../src/services/taxBilletLine')
 const errors = require('./../src/errors');
+const modules = require('./../src/services/modules');
 
 chai.use(spies);
 const expect = chai.expect;
@@ -12,10 +13,43 @@ const sandbox = chai.spy.sandbox();
 describe('taxBillet Services', () => {
     beforeEach(() => {
         sandbox.on(taxBilletLine, ['splitTaxBilletLine']);
+        sandbox.on(modules, ['taxModule10', 'taxModule11']);
     });
 
     afterEach(() => {
         sandbox.restore();
+    });
+
+    it('mountTaxBilletInfo function should taxModule10 for currency code 6', (done) => {
+        const fields = {
+            field1: '82650000000',
+            field1DV: '3',
+            field2: '52620097148',
+            field2DV: '3',
+            field3: '22020593391',
+            field3DV: '8',
+            field4: '41918120022',
+            field4DV: '3'
+        }
+        taxBillet.mountTaxBilletInfo(fields);
+        expect(modules.taxModule10).to.have.been.called.with.exactly('8260000000526200971482202059339141918120022');
+        done();
+    });
+
+    it('mountTaxBilletInfo function should taxModule11 for currency code 6', (done) => {
+        const fields = {
+            field1: '85890000460',
+            field1DV: '9',
+            field2: '52460179160',
+            field2DV: '5',
+            field3: '60759305086',
+            field3DV: '5',
+            field4: '83148300001',
+            field4DV: '0'
+        }
+        taxBillet.mountTaxBilletInfo(fields);
+        expect(modules.taxModule11).to.have.been.called.with.exactly('8580000460524601791606075930508683148300001');
+        done();
     });
 
     // it('mountTaxBilletInfo should call info from each field/block', (done) => {

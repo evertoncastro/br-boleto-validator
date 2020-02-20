@@ -42,10 +42,13 @@ function taxModule11(barCode){
         return n + prod;
     }, 0);
     let mod = sum % 11;
-    if(mod === 1){
-        mod = 0;
+    if(mod === 1 || mod === 0){
+        return '0';
+    } else if(mod === 10){
+        return '1';
     }
-    return mod.toString();
+    const dv = 11 - mod;
+    return dv.toString();
 }
 
 module.exports = {

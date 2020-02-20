@@ -21,7 +21,7 @@ function mountTaxBilletInfo(lineInfo){
     const secondPart = tempBarCode.slice(4);
     let moduleFunc = null;
     if(currencyCode === '6' || currencyCode === '7') moduleFunc = modules.taxModule10;
-    else if(currencyCode === '8' || currencyCode === '9') moduleFunc = module.taxModule11;
+    else if(currencyCode === '8' || currencyCode === '9') moduleFunc = modules.taxModule11;
     else throw new errors.BusinessException('INVALID CURRENCY CODE');
     if(moduleFunc(`${firstPart}${secondPart}`) !== currentDV) throw new errors.BusinessException('INVALID BAR CODE DV');
     return {
