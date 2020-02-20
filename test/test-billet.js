@@ -49,7 +49,7 @@ describe('billet Services', () => {
         done();
     });
 
-    it('startBilletLineCheck function should throw exception for invalid tax line currency code', (done) => {
+    it('startBilletLineCheck function should not throw exception for invalid tax line currency code', (done) => {
         const line = '83600000001-5 02570048100-2 68071551541-6 00126916582-3'
         expect(() => billet.startBilletLineCheck(line)).not.to.throws(errors.BusinessException(), 'INVALID LINE SIZE');
         done();

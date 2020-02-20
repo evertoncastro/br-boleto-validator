@@ -26,11 +26,12 @@ function bankModule11(barCode){
 function taxModule10(barCode){
     const value = barCode.split('').reverse();
     const sum = value.reduce((n, current, index) => {
-        const prod = Number(current) * (((index + 1) % 2) + 1);
+        let prod = Number(current) * (((index + 1) % 2) + 1);
+        prod = (prod > 9 ? Math.trunc(prod / 10) + (prod % 10) : prod);
         return n + prod;
     }, 0);
-    let mod = 10 - (sum % 10);
-    return ((Math.ceil(sum / 10) * 10) - sum).toString();
+    let dv = ((Math.ceil(sum / 10) * 10) - sum)
+    return dv.toString(); 
 }
 
 function taxModule11(barCode){
