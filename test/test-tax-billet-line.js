@@ -2,6 +2,7 @@ const chai = require('chai');
 const spies = require('chai-spies');
 const taxBilletLine = require('./../src/services/taxBilletLine');
 const modules = require('./../src/services/modules');
+const errors = require('./../src/errors');
 
 chai.use(spies);
 const expect = chai.expect;
@@ -37,9 +38,19 @@ describe('taxBilletLine services', () => {
         done();
     });
 
+    it('checkTaxField1 should throw exception for invalid DV', (done) => {
+        expect(() => taxBilletLine.checkTaxField1DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 1');
+        done();
+    });
+
     it('checkTaxField2 should call calcModule with right params', (done) => {
         taxBilletLine.checkTaxField2DV('52620097148', '3')
         expect(modules.calcModule10).to.have.been.called.with.exactly('52620097148');
+        done();
+    });
+
+    it('checkTaxField2 should throw exception for invalid DV', (done) => {
+        expect(() => taxBilletLine.checkTaxField2DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 2');
         done();
     });
 
@@ -49,9 +60,19 @@ describe('taxBilletLine services', () => {
         done();
     });
 
+    it('checkTaxField3 should throw exception for invalid DV', (done) => {
+        expect(() => taxBilletLine.checkTaxField3DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 3');
+        done();
+    });
+
     it('checkTaxField4 should call calcModule with right params', (done) => {
         taxBilletLine.checkTaxField4DV('41918120022', '3')
         expect(modules.calcModule10).to.have.been.called.with.exactly('41918120022');
+        done();
+    });
+
+    it('checkTaxField4 should throw exception for invalid DV', (done) => {
+        expect(() => taxBilletLine.checkTaxField4DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 4');
         done();
     });
 })
