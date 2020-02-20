@@ -1,7 +1,8 @@
-let chai  = require('chai');
-let spies = require('chai-spies');
-let bankBillet = require('./../src/services/bankBillet');
-let bankBilletLine = require('./../src/services/bankBilletLine')
+const chai  = require('chai');
+const spies = require('chai-spies');
+const bankBillet = require('./../src/services/bankBillet');
+const bankBilletLine = require('./../src/services/bankBilletLine');
+const modules = require('./../src/services/modules');
 const errors = require('./../src/errors');
 
 chai.use(spies);
@@ -12,11 +13,23 @@ const sandbox = chai.spy.sandbox();
 describe('bankBillet Services', () => {
     beforeEach(() => {
         sandbox.on(bankBilletLine, ['infoFromField1', 'infoFromField2', 
-        'infoFromField3', 'infoFromField5', 'splitBilletLine']);
+        'infoFromField3', 'infoFromField5', 'splitBilletLine', 'checkField1DV',
+        'checkField2DV', 'checkField3DV']);
+        sandbox.on(modules, ['bankModule11']);
     });
 
     afterEach(() => {
         sandbox.restore(); // restores original methods on `array`
+    });
+
+    it('bankBillet function should call split billet line', (done) => {
+        const line = '00190500954014481606906809350314337370000000100'
+        bankBillet.bankBillet(line);
+        expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
+        expect(bankBilletLine.checkField1DV).to.have.been.called.with.exactly('001905009', '5');
+        expect(bankBilletLine.checkField2DV).to.have.been.called.with.exactly('4014481606', '9');
+        expect(bankBilletLine.checkField3DV).to.have.been.called.with.exactly('0680935031', '4');
+        done();
     });
 
     it('mountBankLine should call info from each field/block', (done) => {
@@ -34,6 +47,7 @@ describe('bankBillet Services', () => {
         expect(bankBilletLine.infoFromField2).to.have.been.called.with.exactly('4014481606', '9');
         expect(bankBilletLine.infoFromField3).to.have.been.called.with.exactly('0680935031', '4');
         expect(bankBilletLine.infoFromField5).to.have.been.called.with.exactly('37370000000100');
+        expect(modules.bankModule11).to.have.been.called.with.exactly('0019373700000001000500940144816060680935031');
         done();
     });
 
@@ -88,13 +102,6 @@ describe('bankBillet Services', () => {
         expect(currency).to.be.equal('0.01');
         currency = bankBillet.getCurrencyFromValue('0000080001');
         expect(currency).to.be.equal('800.01');
-        done();
-    });
-
-    it('bankBillet function should call split billet line', (done) => {
-        const line = '00190500954014481606906809350314337370000000100'
-        bankBillet.bankBillet(line);
-        expect(bankBilletLine.splitBilletLine).to.have.been.called.with.exactly(line);
         done();
     });
 
