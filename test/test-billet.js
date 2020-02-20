@@ -139,6 +139,18 @@ describe('Integration Tests for Bank Line Billets', () => {
         done();
     });
 
+    it('startBilletLineCheck should return and object for a valid non sanitized bank line 2', (done) => {
+        const line = '23791.11103 60000.000103 01000.222206 1 48622000000000'
+        response = billet.startBilletLineCheck(line);
+        expect(response).to.deep.equal({
+            "barCode": "23791486220000000001111060000000100100022220",
+            "billetDueDate": "2011-01-29",
+            "billetValue": "20000000.00",
+            "validLine": true
+        });
+        done();
+    });
+
 });
 
 
