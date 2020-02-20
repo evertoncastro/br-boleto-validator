@@ -1,7 +1,6 @@
 # Validador de Boleto
 
 ## O projeto
----
 
 ### Sobre
 
@@ -22,7 +21,6 @@ Os testes unitários foram criados utilizando Mocha.js e Chai.js
 
 
 ## Dependências
----
 
 - Node 10.16 ou posterior
 - Express 4.17.1
@@ -31,9 +29,8 @@ Os testes unitários foram criados utilizando Mocha.js e Chai.js
 - Chai Spies 1.0.0
 
 ## Funcionamento
----
 
-## Setup
+### Setup
 
 
 ```cd boleto```
@@ -41,13 +38,13 @@ Os testes unitários foram criados utilizando Mocha.js e Chai.js
 ```npm install```
 
 
-## Tests
+### Tests
 
 ```cd boleto```
 
 ```npm test```
 
-## Server
+### Server
 
 ```cd boleto```
 
