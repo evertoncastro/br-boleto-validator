@@ -35,6 +35,7 @@ describe('taxBillet Services', () => {
         });
         expect(barCode).to.be.deep.equal({
             barCode: '82650000000526200971482202059339141918120022',
+            billetValue: '52.62',
             validLine: true
         });
         done();

@@ -28,10 +28,17 @@ function mountTaxBilletInfo(lineInfo){
     const secondPart = tempBarCode.slice(4);
     let moduleFunc = identifyModule(currencyCode);
     if(moduleFunc(`${firstPart}${secondPart}`) !== currentDV) throw new errors.BusinessException('INVALID BAR CODE DV');
+    const barCode = `${firstPart}${currentDV}${secondPart}`
     return {
-        barCode: `${firstPart}${currentDV}${secondPart}`,
-        validLine: true
+        barCode: barCode,
+        billetValue: getCurrencyFromValue(barCode.slice(5, 15)),
+        validLine: true,
+
     }
+}
+
+function getCurrencyFromValue(value){
+    return `${Number(value.slice(0, value.length-2))}.${value.slice(-2)}`
 }
 
 module.exports = {

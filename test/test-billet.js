@@ -65,6 +65,7 @@ describe('Integration Tests for Tax Line Billets', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "83600000001025700481006807155154100126916582",
+            "billetValue": "102.57",
             "validLine": true
         });
         done();
@@ -75,6 +76,7 @@ describe('Integration Tests for Tax Line Billets', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "85890000460524601791606075930508683148300001",
+            "billetValue": "46052.46",
             "validLine": true
         });
         done();
@@ -85,6 +87,7 @@ describe('Integration Tests for Tax Line Billets', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "82650000000526200971482202059339141918120022",
+            "billetValue": "52.62",
             "validLine": true
         });
         done();
@@ -95,6 +98,7 @@ describe('Integration Tests for Tax Line Billets', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "83620000000667800481001809756573100158963608",
+            "billetValue": "66.78",
             "validLine": true
         });
         done();
@@ -105,6 +109,7 @@ describe('Integration Tests for Tax Line Billets', () => {
         response = billet.startBilletLineCheck(line);
         expect(response).to.deep.equal({
             "barCode": "89610000000599800010110533320100626000015744",
+            "billetValue": "59.98",
             "validLine": true
         });
         done();
