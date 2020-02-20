@@ -15,29 +15,29 @@ function splitTaxBilletLine(line){
     }
 }
 
-function checkTaxField1DV(value, expectedDV){
-    if(modules.calcModule10(value) !== expectedDV){
+function checkTaxField1DV(value, expectedDV, moduleFunc){
+    if(moduleFunc(value) !== expectedDV){
         throw new errors.BusinessException('INVALID DV FOR BLOCK 1');
     }
     return true;
 }
 
-function checkTaxField2DV(value, expectedDV){
-    if(modules.calcModule10(value) !== expectedDV){
+function checkTaxField2DV(value, expectedDV, moduleFunc){
+    if(moduleFunc(value) !== expectedDV){
         throw new errors.BusinessException('INVALID DV FOR BLOCK 2');
     }
     return true;
 }
 
-function checkTaxField3DV(value, expectedDV){
-    if(modules.calcModule10(value) !== expectedDV){
+function checkTaxField3DV(value, expectedDV, moduleFunc){
+    if(moduleFunc(value) !== expectedDV){
         throw new errors.BusinessException('INVALID DV FOR BLOCK 3');
     }
     return true;
 }
 
-function checkTaxField4DV(value, expectedDV){
-    if(modules.calcModule10(value) !== expectedDV){
+function checkTaxField4DV(value, expectedDV, moduleFunc){
+    if(moduleFunc(value) !== expectedDV){
         throw new errors.BusinessException('INVALID DV FOR BLOCK 4');
     }
     return true;

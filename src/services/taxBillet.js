@@ -5,11 +5,19 @@ let errors = require('./../errors');
 
 function taxBillet(line){
     const fields = taxBilletLine.splitTaxBilletLine(line);
-    taxBilletLine.checkTaxField1DV(fields.field1, fields.field1DV);
-    taxBilletLine.checkTaxField2DV(fields.field2, fields.field2DV);
-    taxBilletLine.checkTaxField3DV(fields.field3, fields.field3DV);
-    taxBilletLine.checkTaxField4DV(fields.field4, fields.field4DV);
+    const currencyCode = line[2];
+    let moduleFunc = identifyModule(currencyCode);
+    taxBilletLine.checkTaxField1DV(fields.field1, fields.field1DV, moduleFunc);
+    taxBilletLine.checkTaxField2DV(fields.field2, fields.field2DV, moduleFunc);
+    taxBilletLine.checkTaxField3DV(fields.field3, fields.field3DV, moduleFunc);
+    taxBilletLine.checkTaxField4DV(fields.field4, fields.field4DV, moduleFunc);
     return mountTaxBilletInfo(fields);
+}
+
+function identifyModule(currencyCode){
+    if(currencyCode === '6' || currencyCode === '7') return modules.taxModule10;
+    else if(currencyCode === '8' || currencyCode === '9') return modules.taxModule11;
+    else throw new errors.BusinessException('INVALID CURRENCY CODE');
 }
 
 function mountTaxBilletInfo(lineInfo){
@@ -18,10 +26,7 @@ function mountTaxBilletInfo(lineInfo){
     const firstPart = tempBarCode.slice(0, 3);
     const currentDV = tempBarCode[3];
     const secondPart = tempBarCode.slice(4);
-    let moduleFunc = null;
-    if(currencyCode === '6' || currencyCode === '7') moduleFunc = modules.taxModule10;
-    else if(currencyCode === '8' || currencyCode === '9') moduleFunc = modules.taxModule11;
-    else throw new errors.BusinessException('INVALID CURRENCY CODE');
+    let moduleFunc = identifyModule(currencyCode);
     if(moduleFunc(`${firstPart}${secondPart}`) !== currentDV) throw new errors.BusinessException('INVALID BAR CODE DV');
     return {
         barCode: `${firstPart}${currentDV}${secondPart}`,
@@ -31,5 +36,6 @@ function mountTaxBilletInfo(lineInfo){
 
 module.exports = {
     taxBillet: taxBillet,
-    mountTaxBilletInfo: mountTaxBilletInfo
+    mountTaxBilletInfo: mountTaxBilletInfo,
+    identifyModule: identifyModule
 }

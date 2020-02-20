@@ -11,7 +11,7 @@ const sandbox = chai.spy.sandbox();
 describe('taxBilletLine services', () => {
 
     beforeEach(() => {
-        sandbox.on(modules, ['calcModule10']);
+        sandbox.on(modules, ['calcModule10', 'taxModule10']);
     });
 
     afterEach(() => {
@@ -33,46 +33,46 @@ describe('taxBilletLine services', () => {
     });
 
     it('checkTaxField1 should call calcModule with right params', (done) => {
-        taxBilletLine.checkTaxField1DV('82650000000', '3')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('82650000000');
+        taxBilletLine.checkTaxField1DV('82650000000', '3', modules.taxModule10)
+        expect(modules.taxModule10).to.have.been.called.with.exactly('82650000000');
         done();
     });
 
     it('checkTaxField1 should throw exception for invalid DV', (done) => {
-        expect(() => taxBilletLine.checkTaxField1DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 1');
+        expect(() => taxBilletLine.checkTaxField1DV('82650000000', '4', modules.taxModule10)).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 1');
         done();
     });
 
     it('checkTaxField2 should call calcModule with right params', (done) => {
-        taxBilletLine.checkTaxField2DV('52620097148', '3')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('52620097148');
+        taxBilletLine.checkTaxField2DV('52620097148', '3', modules.taxModule10)
+        expect(modules.taxModule10).to.have.been.called.with.exactly('52620097148');
         done();
     });
 
     it('checkTaxField2 should throw exception for invalid DV', (done) => {
-        expect(() => taxBilletLine.checkTaxField2DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 2');
+        expect(() => taxBilletLine.checkTaxField2DV('82650000000', '4', modules.taxModule10)).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 2');
         done();
     });
 
     it('checkTaxField3 should call calcModule with right params', (done) => {
-        taxBilletLine.checkTaxField3DV('22020593391', '8')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('22020593391');
+        taxBilletLine.checkTaxField3DV('22020593391', '8', modules.taxModule10)
+        expect(modules.taxModule10).to.have.been.called.with.exactly('22020593391');
         done();
     });
 
     it('checkTaxField3 should throw exception for invalid DV', (done) => {
-        expect(() => taxBilletLine.checkTaxField3DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 3');
+        expect(() => taxBilletLine.checkTaxField3DV('82650000000', '4', modules.taxModule10)).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 3');
         done();
     });
 
     it('checkTaxField4 should call calcModule with right params', (done) => {
-        taxBilletLine.checkTaxField4DV('41918120022', '3')
-        expect(modules.calcModule10).to.have.been.called.with.exactly('41918120022');
+        taxBilletLine.checkTaxField4DV('41918120022', '3', modules.taxModule10)
+        expect(modules.taxModule10).to.have.been.called.with.exactly('41918120022');
         done();
     });
 
     it('checkTaxField4 should throw exception for invalid DV', (done) => {
-        expect(() => taxBilletLine.checkTaxField4DV('82650000000', '4')).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 4');
+        expect(() => taxBilletLine.checkTaxField4DV('82650000000', '4', modules.taxModule10)).to.throws(errors.BusinessException(), 'INVALID DV FOR BLOCK 4');
         done();
     });
 })

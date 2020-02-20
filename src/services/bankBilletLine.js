@@ -1,7 +1,6 @@
 const modules = require('./modules');
 const errors = require('./../errors');
 
-// TODO: include bank in function name?
 function splitBilletLine(line){
     return {
         field1: line.substr(0, 9),
