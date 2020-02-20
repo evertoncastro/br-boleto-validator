@@ -4,7 +4,6 @@ let errors = require('./../errors');
 
 
 function taxBillet(line){
-    // TODO: more tests for calls
     const fields = taxBilletLine.splitTaxBilletLine(line);
     taxBilletLine.checkTaxField1DV(fields.field1, fields.field1DV);
     taxBilletLine.checkTaxField2DV(fields.field2, fields.field2DV);

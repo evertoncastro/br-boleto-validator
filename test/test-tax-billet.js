@@ -12,7 +12,8 @@ const sandbox = chai.spy.sandbox();
 
 describe('taxBillet Services', () => {
     beforeEach(() => {
-        sandbox.on(taxBilletLine, ['splitTaxBilletLine']);
+        sandbox.on(taxBilletLine, ['splitTaxBilletLine', 'checkTaxField1DV', 
+        'checkTaxField2DV', 'checkTaxField3DV', 'checkTaxField4DV']);
         sandbox.on(modules, ['taxModule10', 'taxModule11']);
     });
 
@@ -52,23 +53,16 @@ describe('taxBillet Services', () => {
         done();
     });
 
-    // it('mountTaxBilletInfo should call info from each field/block', (done) => {
-    //     bankBillet.mountTaxBilletInfo({
-    //         field1: '001905009',
-    //         field1DV: '5',
-    //         field2: '4014481606',
-    //         field2DV: '9',
-    //         field3: '0680935031',
-    //         field3DV: '4',
-    //         field4: '3',
-    //         field5: '37370000000100'
-    //     });
-    //     expect(bankBilletLine.infoFromField1).to.have.been.called.with.exactly('001905009', '5');
-    //     expect(bankBilletLine.infoFromField2).to.have.been.called.with.exactly('4014481606', '9');
-    //     expect(bankBilletLine.infoFromField3).to.have.been.called.with.exactly('0680935031', '4');
-    //     expect(bankBilletLine.infoFromField5).to.have.been.called.with.exactly('37370000000100');
-    //     done();
-    // });
+    it('taxBillet should call info from every check dv', (done) => {
+        const line = '826500000003526200971483220205933918419181200223';
+        taxBillet.taxBillet(line);
+        expect(taxBilletLine.splitTaxBilletLine).to.have.been.called.with.exactly('826500000003526200971483220205933918419181200223');
+        expect(taxBilletLine.checkTaxField1DV).to.have.been.called.with.exactly('82650000000', '3');
+        expect(taxBilletLine.checkTaxField2DV).to.have.been.called.with.exactly('52620097148', '3');
+        expect(taxBilletLine.checkTaxField3DV).to.have.been.called.with.exactly('22020593391', '8');
+        expect(taxBilletLine.checkTaxField4DV).to.have.been.called.with.exactly('41918120022', '3');
+        done();
+    });
 
     it('mountTaxBilletInfo should return a valid tax billet bar code', (done) => {
         let barCode = taxBillet.mountTaxBilletInfo({
