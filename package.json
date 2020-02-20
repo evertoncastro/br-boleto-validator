@@ -1,12 +1,12 @@
 {
-  "name": "boleto",
+  "name": "Validador de Boleto",
   "version": "1.0.0",
   "description": "API",
   "main": "app.js",
   "scripts": {
     "test": "mocha"
   },
-  "author": "evertoncastro",
+  "author": "github.com/evertoncastro",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
