@@ -40,7 +40,7 @@ npm install
 ```
 
 
-### Tests
+### Testes
 
 ```
 cd boleto
@@ -48,7 +48,7 @@ cd boleto
 npm test
 ```
 
-### Server
+### Aplicação
 
 ```
 cd boleto
@@ -57,7 +57,7 @@ node src/app.js
 ```
 
 
-## Endpoint
+## Rotas
 
 ### GET /get_billet_info
 
@@ -89,7 +89,6 @@ As mensagens inválidas variam conforme o erro
 - INVALID DV FOR BLOCK [X] (Indica que um dos blocos está com dígito inválido).
 
 - INVALID LINE SIZE (Indica que foi informada uma linha digitável de tamanho diferente de 47 ou 48 caracteres).
-
 
 - INVALID BAR CODE DV (Indica que o dígito verificador do código de barras está inválido).
 
